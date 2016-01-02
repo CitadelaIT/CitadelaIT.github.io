@@ -1,0 +1,69 @@
+<script src="../bower_components/page/page.js"></script>
+<script>
+  window.addEventListener('WebComponentsReady', function() {
+
+    // We use Page.js for routing. This is a Micro
+    // client-side router inspired by the Express router
+    // More info: https://visionmedia.github.io/page.js/
+
+    // If this is a full page URL - set it as base
+    if (window.location.pathname.indexOf('html') > 0) {
+      app.baseUrl = window.location.pathname;
+    }
+
+    // Removes end / from app.baseUrl which page.base requires for production
+    if (window.location.port === '') {  // if production
+      page.base(app.baseUrl.replace(/\/$/, ''));
+    }
+
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
+      next();
+    }
+
+    function closeDrawer(ctx, next) {
+      app.closeDrawer();
+      next();
+    }
+
+    function setContext(ctx, next) {
+      app.routerctx = ctx;
+      next();
+    }
+
+    // Routes
+    page('*', scrollToTop, closeDrawer, setContext, function(ctx, next) {
+      next();
+    });
+
+    page('/', function() {
+      app.route = 'home';
+    });
+
+    page(app.baseUrl, function() {
+      app.route = 'home';
+    });
+
+    page('/contact', function() {
+      app.route = 'contact';
+    });
+
+    // 404
+    page('*', function() {
+      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
+      app.$.toast.show();
+      page.redirect(app.baseUrl);
+    });
+
+    // main flag
+    hashbangflag = true;
+    // add #! before urls
+    page({
+      hashbang: hashbangflag
+    });
+    // share this flag the context
+    app.routerctx.hashbang = hashbangflag;
+
+  });
+</script>
