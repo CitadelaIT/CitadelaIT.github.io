@@ -3,3 +3,7 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+img.svgletter {
+  width: 12px;
+}
