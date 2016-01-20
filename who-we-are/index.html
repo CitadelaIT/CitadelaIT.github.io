@@ -9,13 +9,13 @@
   <title>Who we are | Citadela IT</title>
 
   <!-- Favorite icon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="../images/favicon.png">
   <!-- Regular CSS -->
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="../styles/main.css">
   <!-- Shady DOM Polyfill library -->
-  <script src="scripts/webcomponents-lite.js"></script>
+  <script src="../scripts/webcomponents-lite.js"></script>
   <!-- Polymer built-in elements, routing, styles and custom elements -->
-  <link rel="import" href="elements/elements.vulcanized.html">
+  <link rel="import" href="../elements/elements.vulcanized.html">
   <!-- Enable Polymer shared styles -->
   <style is="custom-style" include="shared-styles"></style>
 </head>
@@ -36,12 +36,16 @@
         <!-- Nav Menu-->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
           <a href="javascript:document.location.href='/'">
-            <iron-icon src="images/menu/back_home.png"></iron-icon>
-            <span>Return</span>
+            <iron-icon src="../images/menu/back-home.png"></iron-icon>
+            <span>Back home</span>
           </a>
           <a data-route="home" href="{{baseUrl}}">
-            <iron-icon src="images/menu/people.png"></iron-icon>
-            <span>People</span>
+            <iron-icon src="../images/menu/who-we-are.png"></iron-icon>
+            <span>Our story</span>
+          </a>
+          <a data-route="people" href="{{baseUrl}}people">
+            <iron-icon src="../images/menu/our-people.png"></iron-icon>
+            <span>Our people</span>
           </a>
         </paper-menu>
       </paper-scroll-header-panel>
@@ -81,16 +85,31 @@
 
             <section data-route="home">
               <paper-material elevation="1" class="paper-font-body2">
-                <h1 class="page-title">People</h1>
+                <h1 class="page-title">Our story</h1>
+                <p class="paper-font-headline">Who we are and where we came from?</p>
+                <p class="paper-font-subhead">Like any beginning, ours was a modest one too.
+                Each of us trying to learn and deal with everyday obstacles on his own.
+                But time passed, practice brought success and satisfied customers repaid us with confidence.
+                It gave us opportunity to seek the challenge of ambitious projects. Made tough requirements and high responsibility part of our life.
+                Then we joined together. A group of professionals sharing the desire to consolidate their knowledge.
+                To create something better than any one of us could hope to achieve on his own.
+                Today we are an organization with its own style and character. With the experience and determination to do our job and win every time.
+                We are Citadela IT!</p>
+              </paper-material>
+            </section>
+
+            <section data-route="people">
+              <paper-material elevation="1" class="paper-font-body2">
+                <h1 class="page-title">Our people</h1>
                 <p class="paper-font-headline">Boris Hamanov</p>
                 <p class="paper-font-title">CEO and Founder</p>
                 <p class="paper-font-subhead">My job is to shape this company
                 after my personal vision, using my technical skills and domain knowledge to help it move forward.
                 I believe whatever stands undisputed is the one to challenge and whatever seems impossible is the one to do!</p>
-                <p><a href="https://uk.linkedin.com/in/borishamanov" rel="external"><paper-icon-button src="images/ico/linkedin-logo.png"></paper-icon-button></a>
+                <p><a href="https://uk.linkedin.com/in/borishamanov" rel="external"><paper-icon-button src="../images/ico/linkedin-logo.png"></paper-icon-button></a>
                 Come visit anytime at my
                 <a href="https://uk.linkedin.com/in/borishamanov" rel="external">LinkedIn profile</a></p>
-                <p><a href="http://resume.linkedinlabs.com/emip7l0e4" rel="external"><paper-icon-button src="images/ico/cv-vitruvian-man.png"></paper-icon-button></a>
+                <p><a href="http://resume.linkedinlabs.com/emip7l0e4" rel="external"><paper-icon-button src="../images/ico/cv-vitruvian-man.png"></paper-icon-button></a>
                 Browse my printable
                 <a href="http://resume.linkedinlabs.com/emip7l0e4" rel="external">CV page</a></p>
               </paper-material>
@@ -103,10 +122,14 @@
 
     </paper-drawer-panel>
 
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+
   </template>
 
   <!-- build:js scripts/app.js -->
-  <script src="scripts/app.js"></script>
+  <script src="../scripts/app.js"></script>
   <!-- endbuild-->
 </body>
 

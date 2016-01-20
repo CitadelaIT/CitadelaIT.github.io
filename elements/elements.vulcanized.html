@@ -13477,11 +13477,6 @@ module.exports = Array.isArray || function (arr) {
     // client-side router inspired by the Express router
     // More info: https://visionmedia.github.io/page.js/
 
-    // If this is a full page URL - set it as base
-    if (window.location.pathname.indexOf('html') > 0) {
-      app.baseUrl = window.location.pathname;
-    }
-
     // Removes end / from app.baseUrl which page.base requires for production
     if (window.location.port === '') {  // if production
       page.base(app.baseUrl.replace(/\/$/, ''));
@@ -13520,9 +13515,13 @@ module.exports = Array.isArray || function (arr) {
       app.route = 'contact';
     });
 
+    page('/people', function() {
+      app.route = 'people';
+    });
+
     // 404
     page('*', function() {
-      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
+      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to base URL';
       app.$.toast.show();
       page.redirect(app.baseUrl);
     });

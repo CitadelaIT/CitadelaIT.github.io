@@ -6,13 +6,7 @@
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
 
-  // Sets app default base URL
-  app.baseUrl = '/';
-  if (window.location.port === '') {  // if production
-    // Uncomment app.baseURL below and
-    // set app.baseURL to '/your-pathname/' if running from folder in production
-    // app.baseUrl = '/polymer-starter-kit/';
-  }
+  app.baseUrl = window.location.pathname;
 
   app.displayInstalledToast = function() {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
