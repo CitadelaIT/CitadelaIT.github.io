@@ -73,10 +73,10 @@
           <span class="flex"></span>
 
           <!-- Toolbar icons -->
-          <a href="javascript:document.location.href='/'">
+          <a data-route="home" href="{{baseUrl}}">
             <paper-icon-button icon="home"></paper-icon-button>
           </a>
-          <a href="javascript:document.location.href='/' + (app.routerctx.hashbang ? '#!/' : '') + 'contact'">
+          <a data-route="contact" href="{{baseUrl}}contact">
             <paper-icon-button icon="mail"></paper-icon-button>
           </a>
 
