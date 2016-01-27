@@ -13519,6 +13519,10 @@ module.exports = Array.isArray || function (arr) {
       app.route = 'people';
     });
 
+    page('/delivery', function() {
+      app.route = 'delivery';
+    });
+
     // 404
     page('*', function() {
       app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to base URL';

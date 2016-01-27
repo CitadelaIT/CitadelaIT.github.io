@@ -39,6 +39,14 @@
             <iron-icon src="images/menu/welcome.png"></iron-icon>
             <span>Welcome</span>
           </a>
+          <a href="who-we-are" rel="external">
+            <iron-icon src="images/menu/who-we-are.png"></iron-icon>
+            <span>Who we are</span>
+          </a>
+          <a href="what-we-do" rel="external">
+            <iron-icon src="images/menu/what-we-do.png"></iron-icon>
+            <span>What we do</span>
+          </a>
           <a data-route="contact" href="{{baseUrl}}contact">
             <iron-icon src="images/menu/talk-to-us.png"></iron-icon>
             <span>Talk to us</span>
@@ -47,10 +55,6 @@
             <iron-icon src="images/menu/learn-from-us.png"></iron-icon>
             <span>Learn from us</span>
           </a>-->
-          <a href="who-we-are" rel="external">
-            <iron-icon src="images/menu/who-we-are.png"></iron-icon>
-            <span>Who we are</span>
-          </a>
           <a href="legal" rel="external">
             <iron-icon src="images/menu/legal.png"></iron-icon>
             <span>Legal</span>
@@ -69,10 +73,10 @@
           <span class="flex"></span>
 
           <!-- Toolbar icons -->
-          <a data-route="home" href="{{baseUrl}}">
+          <a href="javascript:document.location.href='/'">
             <paper-icon-button icon="home"></paper-icon-button>
           </a>
-          <a data-route="contact" href="{{baseUrl}}contact">
+          <a href="javascript:document.location.href='/' + (app.routerctx.hashbang ? '#!/' : '') + 'contact'">
             <paper-icon-button icon="mail"></paper-icon-button>
           </a>
 
