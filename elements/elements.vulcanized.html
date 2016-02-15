@@ -13523,6 +13523,10 @@ module.exports = Array.isArray || function (arr) {
       app.route = 'delivery';
     });
 
+    page('/thanks', function() {
+      app.route = 'thanks';
+    });
+
     // 404
     page('*', function() {
       app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to base URL';
@@ -13713,7 +13717,7 @@ module.exports = Array.isArray || function (arr) {
 
   paper-material a {
     color: var(--menu-link-color);
-    text-decoration: none;
+    text-decoration: underline;
     font-family: 'Roboto', 'Noto', sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
