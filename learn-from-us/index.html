@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Here we share our thoughts with the humanity hive mind, better known as the Net.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn from us | Citadela IT</title>
+
+  <!-- Favorite icon -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <!-- Regular CSS -->
+  <link rel="stylesheet" href="../styles/main.css">
+  <!-- Shady DOM Polyfill library -->
+  <script src="../scripts/webcomponents-lite.js"></script>
+  <!-- Polymer built-in elements, routing, styles and custom elements -->
+  <link rel="import" href="../elements/elements.vulcanized.html">
+  <!-- Enable Polymer shared styles -->
+  <style is="custom-style" include="shared-styles"></style>
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel">
+
+      <!-- Left Area -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Menu Toolbar -->
+        <cit-menu-toolbar name="Menu">
+        </cit-menu-toolbar>
+
+        <!-- Nav Menu-->
+        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+          <a href="javascript:document.location.href='/'">
+            <iron-icon src="../images/menu/back-home.png"></iron-icon>
+            <span>Back home</span>
+          </a>
+          <a data-route="home" href="{{baseUrl}}">
+            <iron-icon src=""></iron-icon>
+            <span>2016</span>
+          </a>
+        </paper-menu>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar" class="tall">
+
+          <!-- Content -->
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+          <span class="flex"></span>
+
+          <!-- Toolbar icons -->
+          <a href="javascript:document.location.href='/'">
+            <paper-icon-button icon="home"></paper-icon-button>
+          </a>
+          <a href="javascript:document.location.href='/' + (app.routerctx.hashbang ? '#!/' : '') + 'contact'">
+            <paper-icon-button icon="mail"></paper-icon-button>
+          </a>
+
+          <!-- Application name -->
+          <div class="middle middle-container center horizontal layout">
+            <div class="app-name">Citadela IT</div>
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom bottom-container center horizontal layout">
+            <div class="bottom-title paper-font-subhead">Learn from us</div>
+          </div>
+        </paper-toolbar>
+
+        <!-- Main Content -->
+        <div class="content">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+            <section data-route="home">
+              <paper-material elevation="1" class="paper-font-body2">
+                <h1 class="page-title">2016</h1>
+                <p class="paper-font-headline">Here we share our thoughts with the humanity hive mind, better known as the Net.</p>
+                <p class="paper-font-title">Topic title</p>
+              </paper-material>
+            </section>
+
+          </iron-pages>
+        </div>
+
+      </paper-scroll-header-panel>
+
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="../scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>
