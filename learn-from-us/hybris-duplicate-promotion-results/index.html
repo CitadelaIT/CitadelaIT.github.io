@@ -4,18 +4,18 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Here we share our thoughts with the humanity hive mind, better known as the Net.">
+  <meta name="description" content="How to avoid duplicate promotion results that are killing your cart?">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Learn from us | Citadela IT</title>
+  <title>Hybris duplicate promotion results | Learn from us</title>
 
   <!-- Favorite icon -->
-  <link rel="icon" type="image/png" href="../images/favicon.png">
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
   <!-- Regular CSS -->
-  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../../styles/main.css">
   <!-- Shady DOM Polyfill library -->
-  <script src="../scripts/webcomponents-lite.js"></script>
+  <script src="../../scripts/webcomponents-lite.js"></script>
   <!-- Polymer built-in elements, routing, styles and custom elements -->
-  <link rel="import" href="../elements/elements.vulcanized.html">
+  <link rel="import" href="../../elements/elements.vulcanized.html">
   <!-- Enable Polymer shared styles -->
   <style is="custom-style" include="shared-styles"></style>
 </head>
@@ -35,13 +35,13 @@
 
         <!-- Nav Menu-->
         <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
-          <a href="javascript:document.location.href='/'">
-            <iron-icon src="../images/menu/back-home.png"></iron-icon>
-            <span>Back home</span>
+          <a href="javascript:document.location.href='/learn-from-us'">
+            <iron-icon src="../../images/menu/contents.png"></iron-icon>
+            <span>Contents</span>
           </a>
           <a data-route="home" href="{{baseUrl}}">
-            <iron-icon src="../images/menu/learn-from-us.png"></iron-icon>
-            <span>Latest articles</span>
+            <iron-icon src="../../images/menu/article.png"></iron-icon>
+            <span>Article</span>
           </a>
         </paper-menu>
       </paper-scroll-header-panel>
@@ -66,12 +66,12 @@
 
           <!-- Application name -->
           <div class="middle middle-container center horizontal layout">
-            <div class="app-name">Citadela IT</div>
+            <div class="app-name">Learn from us</div>
           </div>
 
           <!-- Application sub title -->
           <div class="bottom bottom-container center horizontal layout">
-            <div class="bottom-title paper-font-subhead">Learn from us</div>
+            <div class="bottom-title paper-font-subhead">Hybris duplicate promotion results</div>
           </div>
         </paper-toolbar>
 
@@ -81,14 +81,20 @@
 
             <section data-route="home">
               <paper-material elevation="1" class="paper-font-body2">
-                <h1 class="page-title">Latest articles</h1>
-                <p class="paper-font-headline">Here we share our thoughts with the humanity hive mind, better known as the Net.</p>
-                <p class="paper-font-title">Contents</p>
-                <dl class="paper-font-subhead">
-                  <dt>Hybris performance</dt>
-                  <dd><a href="hybris-duplicate-promotion-results" rel="external">
-                  How to avoid duplicate promotion results that are killing your cart?</a></dd>
-                </dl>
+                <h1 class="page-title">Article</h1>
+                <p class="paper-font-headline">How to avoid duplicate promotion results that are killing your cart?</p>
+                <p class="paper-font-title">Lorem Ipsum</p>
+                <p class="paper-font-subhead">Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</p>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+                <div id="disqus_thread"></div>
+                <script>
+                  (function() {  // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = '//citadelait.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                </script>
               </paper-material>
             </section>
 
@@ -106,7 +112,7 @@
   </template>
 
   <!-- build:js scripts/app.js -->
-  <script src="../scripts/app.js"></script>
+  <script src="../../scripts/app.js"></script>
   <!-- endbuild-->
 </body>
 
