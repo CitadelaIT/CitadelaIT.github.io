@@ -13498,6 +13498,11 @@ module.exports = Array.isArray || function (arr) {
       next();
     }
 
+    // This creates another function that will save path properly in its function scope (no block scope in JavaScript)
+    function createCallBack(path) {
+      return function() { app.route = path; };
+    }
+
     // Routes
     page('*', scrollToTop, closeDrawer, setContext, function(ctx, next) {
       next();
@@ -13511,21 +13516,12 @@ module.exports = Array.isArray || function (arr) {
       app.route = 'home';
     });
 
-    page('/contact', function() {
-      app.route = 'contact';
-    });
+    var pagePaths = ['contact', 'people', 'delivery', 'thanks'];
 
-    page('/people', function() {
-      app.route = 'people';
-    });
-
-    page('/delivery', function() {
-      app.route = 'delivery';
-    });
-
-    page('/thanks', function() {
-      app.route = 'thanks';
-    });
+    var pagePathSize = pagePaths.length;
+    for (var i = 0; i < pagePathSize; i++) {
+      page('/' + pagePaths[i], createCallBack(pagePaths[i]));
+    }
 
     // 404
     page('*', function() {
