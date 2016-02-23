@@ -17015,4 +17015,29 @@ module.exports = Array.isArray || function (arr) {
   </script>
 
 </dom-module>
-</div></body></html>
+<dom-module id="cit-article-date" assetpath="cit-article-date/">
+
+  <template>
+
+    <style include="shared-styles"></style>
+
+    <p class="paper-font-caption">Created: {{datecreated}}, Updated: {{dateupdated}}</p>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'cit-article-date',
+      properties: {
+        datecreated: {
+          type: Date
+        },
+        dateupdated: {
+          type: Date,
+          value: function() { return new Date(document.lastModified); }
+        }
+      }
+    });
+  </script>
+
+</dom-module></div></body></html>
