@@ -1,6 +1,11 @@
 (function(document) {
   'use strict';
 
+  // Refirect index.html ending pages like index.html to the root path
+  if (/index\.html$/.test(window.location.pathname)) {
+    window.location.replace(window.location.pathname.substr(0, window.location.pathname.lastIndexOf('index.html')));
+  }
+
   // Grab a reference to our auto-binding template
   // and give it some initial binding values
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
