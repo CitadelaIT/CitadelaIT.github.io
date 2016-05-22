@@ -1,0 +1,176 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="How to use DCEVM HotSwap to get rid of all that waiting for server restart?">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hybris DCEVM HotSwap integration | Learn from us</title>
+
+  <!-- Canonical path -->
+  <link rel="canonical" href="/learn-from-us/hybris-dcevm-hotswap-integration/">
+  <!-- Favorite icon -->
+  <link rel="icon" type="image/png" href="../../images/favicon.png">
+  <!-- Regular CSS -->
+  <link rel="stylesheet" href="../../styles/main.css">
+  <!-- Shady DOM Polyfill library -->
+  <script src="../../scripts/webcomponents-lite.js"></script>
+  <!-- Polymer built-in elements, routing, styles and custom elements -->
+  <link rel="import" href="../../elements/elements.vulcanized.html">
+  <!-- Enable Polymer shared styles -->
+  <style is="custom-style" include="shared-styles"></style>
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel">
+
+      <!-- Left Area -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Menu Toolbar -->
+        <cit-menu-toolbar name="Menu">
+        </cit-menu-toolbar>
+
+        <!-- Nav Menu-->
+        <paper-menu class="list" attr-for-selected="data-route" selected="[[route]]">
+          <a href="javascript:document.location.href='/learn-from-us'">
+            <iron-icon src="../../images/menu/contents.png"></iron-icon>
+            <span>Contents</span>
+          </a>
+          <a data-route="home" href="{{baseUrl}}">
+            <iron-icon src="../../images/menu/article.png"></iron-icon>
+            <span>Part 1</span>
+          </a>
+        </paper-menu>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar" class="tall">
+
+          <!-- Content -->
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+          <span class="flex"></span>
+
+          <!-- Toolbar icons -->
+          <a href="javascript:document.location.href='/'">
+            <paper-icon-button icon="home"></paper-icon-button>
+          </a>
+          <a href="javascript:document.location.href='/' + (app.routerctx.hashbang ? '#!/' : '') + 'contact'">
+            <paper-icon-button icon="mail"></paper-icon-button>
+          </a>
+
+          <!-- Application name -->
+          <div class="middle middle-container center horizontal layout">
+            <div class="app-name">Learn from us</div>
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom bottom-container center horizontal layout">
+            <div class="bottom-title paper-font-subhead">Hybris DCEVM HotSwap integration</div>
+          </div>
+        </paper-toolbar>
+
+        <!-- Main Content -->
+        <div class="content">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+            <section data-route="home">
+              <paper-material elevation="1" class="paper-font-body2">
+                <h1 class="page-title">Part 1</h1>
+                <p class="paper-font-headline">How to use DCEVM HotSwap to get rid of all that waiting for server restart?</p>
+                <cit-article-date datecreated="2016-05-22T18:43:47Z" dateupdated="2016-05-22T20:02:35Z"></cit-article-date>
+                <p class="paper-font-title">What is DCEVM HotSwap and how it works?</p>
+                <p><span class="paper-font-subhead">DCEVM</span> stands for Dynamic Code Evolution Virtual Machine
+                and it is a modification (a JRE patch) of the Java HotSpot(TM)
+                VM that allows unlimited redefinition of loaded classes at runtime. The current hotswapping mechanism of Java is only able
+                to change method bodies. DCEVM brings the possibility of adding and removing fields and methods
+                as well as changes to the supertypes of a class.</p>
+                <p>DCEVM <span class="paper-font-subhead">does its magic</span> by altering the garbage collector,
+                the system dictionary and class metadata. The JIT compiler and the Java interpreter are unaffected.</p>
+                <p><span class="paper-font-subhead">HotSwap</span> is a Java agent that takes care of reloading resources and framework
+                configuration (Spring, Hibernate, ...). It consists of a plugin container with plugin manager, plugin registry,
+                and several agent services (e.g. to watch for class/resource change). The agent also helps with common tasks
+                and classloading issues. It scans classpath for class annotated with @Plugin annotation, injects agent services
+                and registers reloading hooks. Runtime bytecode modification is provided by the Javassist library.</p>
+                <p>A <span class="paper-font-subhead">limitation</span> listed against the HotSwap agent seems to negate
+                the capability of DCEVM to do hierarchy change (change the superclass or remove an interface).</p>
+                <p class="paper-font-title">Why use it?</p>
+                <ul>
+                  <li>It is free and open source.</li>
+                  <li>It is fast.</li>
+                  <li>Does not require complex configuration.</li>
+                  <li>Does not modify the bytecode of all loaded classes.</li>
+                  <li>Easily extendable.</li>
+                  <li>Supports latest Java version.</li>
+                  <li>It will likely be incorporated to Java core in the future.</li>
+                </ul>
+                <p class="paper-font-title">Why not?</p>
+                <ul>
+                  <li>Works on specific JVMs only.</li>
+                  <li>Lacks professional support.</li>
+                </ul>
+              </paper-material>
+
+              <paper-material elevation="1" class="paper-font-body2">
+                <p class="paper-font-title">Step-by-step guide for Hybris</p>
+                <ol>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ol>
+              </paper-material>
+
+              <paper-material elevation="1" class="paper-font-body2">
+
+                <div id="disqus_thread"></div>
+                <script>
+                  (function() {  // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = '//citadelait.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                </script>
+
+              </paper-material>
+            </section>
+
+          </iron-pages>
+        </div>
+
+      </paper-scroll-header-panel>
+
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="../../scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>
