@@ -121,26 +121,105 @@
               <paper-material elevation="1" class="paper-font-body2">
                 <p class="paper-font-title">Step-by-step guide for Hybris</p>
                 <ol>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>Download latest DCEVM light release from <a href="https://github.com/dcevm/dcevm/releases" rel="external">
+                  https://github.com/dcevm/dcevm/releases</a></li>
+                  <li>Download the corresponding JDK version from Oracle Java Archive.<br/>
+                  <paper-card class="warning" heading="Important">
+                    <div class="card-content">
+                      The update version has to match DCEVM release.
+                    </div>
+                  </paper-card></li>
+                  <li>Install the new JDK, adjust JAVA_HOME.</li>
+                  <li>Run <span class="paper-quote">java -jar DCEVM-light-8u[update-version]-installer.jar</span>
+                  from <span class="paper-showoff">elevated / root</span> shell</li>
+                  <li>Make sure it shows the correct installation directory for your recently downloaded new JDK.</li>
+                  <li>Press "Install DCEVM as altjvm":<br/>
+                  <paper-card class="picture" image="../../images/blog/hybris-dcevm-hotswap-integration/installer.jpg">
+                  </paper-card></li>
+                  <li>Download latest release of Hotswap agent jar from:
+                  <a href="https://github.com/HotswapProjects/HotswapAgent/releases" rel="external">
+                  https://github.com/HotswapProjects/HotswapAgent/releases</a></li>
+                  <li>Unpack hotswap-agent.jar, it does not need special installation or setup.</li>
+                  <li>The following should be in your hybris local.properties:
+                  <span class="paper-quote">tomcat.debugjavaoptions=-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n
+                  -javaagent:"[path]/hotswap-agent.jar"=disablePlugin=Hibernate,disablePlugin=Jersey2,disablePlugin=Jetty,disablePlugin=ZK,<br/>
+                  disablePlugin=Logback,disablePlugin=Seam,disablePlugin=ELResolver,disablePlugin=OsgiEquinox,disablePlugin=WebObjects,<br/>
+                  disablePlugin=Weld,disablePlugin=JBossModules,disablePlugin=Resteasy,disablePlugin=Gae -XXaltjvm=dcevm</span><br/>
+                  If there is something else already here, specific to your project, take care to preserve it.
+                  The disablePlugin values are to prevent plugins generally not useful in hybris from loading at a global level.
+                  This should improve performance.</li>
+                  <li>Run <span class="paper-quote">ant build</span>, this is necessary to update
+                  <span class="paper-quote">/platform/tomcat/conf</span>
+                  wrapper configuration for the new JDK location and the <span class="paper-quote">tomcat.debugjavaoptions</span> changes.</li>
+                  <li>Execute <span class="paper-quote">hybrisserver.(bat/sh)</span> with
+                  <span class="paper-quote">debug</span> parameter to run Hybris in <span class="paper-showoff">debug mode.</span></li>
+                  <li>If the HotSwap agent is loaded successfully, you should see a console output like this:<br/>
+                  <paper-card class="picture" image="../../images/blog/hybris-dcevm-hotswap-integration/startup.jpg">
+                  </paper-card></li>
+                  <li>Connect the debugger of your favorite IDE. This is essential as the code evolution is directed by JDWP commands.</li>
+                  <li>If your project is on auto build with the IDE, then this is everything you need.
+                  Change a file and <span class="paper-showoff">the moment it compiles it will hot swap</span>.
+                  All done! If you build manually there are a few more steps. I will use Eclipse to demonstrate.</li>
+                  <li>In Eclipse, make sure that <span class="paper-quote">Project -> Build automatically</span> is disabled and
+                  <span class="paper-quote">Workspace -> Refresh using native hooks for polling</span> is enabled.</li>
+                  <li>Change a file and save it. Then run <span class="paper-quote">ant build</span>
+                  from the root of the project or from the extension that you are working on to save time.
+                  After the build compiles your modified file,
+                  <span class="paper-showoff">Eclipse will be notified to refresh the resource and initiate hot swap via JDWP</span>.
+                  That is it, easy as 1,2,3!<br/>
+                  <paper-card class="warning" heading="Important">
+                    <div class="card-content">
+                      Do not use ant without parameters or ant all, this is not necessary and it will restart your server
+                      making the whole exercise pointless. ant clean is not a good idea as well, for obvious reasons.
+                    </div>
+                  </paper-card></li>
                 </ol>
               </paper-material>
 
               <paper-material elevation="1" class="paper-font-body2">
+                <p class="paper-font-title">Development experience</p>
+                <ul>
+                  <li><span class="paper-font-subhead">Basic code replacement</span> works without issues.
+                  I tested different common code changes both with regular public classes and inside an anonymous ones.</li>
+                  <li>When <span class="paper-font-subhead">adding new method to a class</span> and using hac with
+                  <span class="paper-showoff">Groovy</span>
+                  to check the result I got: <span class="paper-quote">groovy.lang.MissingMethodException:
+                  No signature of method: ... is applicable for argument types: …</span>
+                  Interestingly <span class="paper-showoff">BeanShell</span> didn’t have this problem, executed the new method
+                  and returned the output properly.</li>
+                  <li>In the <span class="paper-font-subhead">hybris console logs</span> you see occasional HotSwap agent messages.
+                  This only happens in certain cases as in this example below where anonymous classes are involved,
+                  often the code would be silently replaced:<br/>
+                  <paper-card class="picture" image="../../images/blog/hybris-dcevm-hotswap-integration/hotswap.jpg">
+                  </paper-card></li>
+                  <li><span class="paper-font-subhead">ZK plugin</span> was causing exceptions, so I had to disable it.</li>
+                  <li><span class="paper-font-subhead">Spring plugin</span> is not very mature in time of writing.
+                  It does not support xml based configuration yet.</li>
+                </ul>
+                <p class="paper-font-title">Production use</p>
+                <p>There is no difference between a DCEVM and a standard HotSpot(TM) VM in the way they execute instructions.
+                When Java code needs to be swapped a special full garbage collection replaces changed objects.
+                After that, the behavior of the VM is completely standard and the performance is unaffected.
+                That makes DCEVM safe and suitable not only for development, but for hot patching a production system as well.
+                Although DCEVM light version could be somewhat older than the latest from Oracle. That is usually OK for development,
+                but for production you should keep in mind new bug fixes and security updates.</p>
+                <p class="paper-font-title">Further reading and reference</p>
+                <ul>
+                  <li>DCEVM project home - <a href="http://ssw.jku.at/dcevm" rel="external">http://ssw.jku.at/dcevm</a></li>
+                  <li>DCEVM latest fork - <a href="https://dcevm.github.io" rel="external">https://dcevm.github.io</a></li>
+                  <li>DCEVM releases - <a href="https://github.com/dcevm/dcevm/releases" rel="external">
+                  https://github.com/dcevm/dcevm/releases</a></li>
+                  <li>In depth article about DCEVM written by its author -
+                  <a href="http://ssw.jku.at/Research/Papers/Wuerthinger10a" rel="external">
+                  http://ssw.jku.at/Research/Papers/Wuerthinger10a</a></li>
+                  <li>HotSwap agent readme - <a href="https://github.com/HotswapProjects/HotswapAgent/blob/master/README.md" rel="external">
+                  https://github.com/HotswapProjects/HotswapAgent/blob/master/README.md</a></li>
+                  <li>HotSwap agent plugins - <a href="http://www.hotswapagent.org/ha-plugins" rel="external">
+                  http://www.hotswapagent.org/ha-plugins</a></li>
+                  <li>HotSwap agent properties - 
+                  <a href="https://github.com/HotswapProjects/HotswapAgent/blob/master/hotswap-agent-core/src/main/resources/hotswap-agent.properties" rel="external">
+                  https://github.com/HotswapProjects/HotswapAgent/blob/master/hotswap-agent-core/src/main/resources/hotswap-agent.properties</a></li>
+                </ul>
 
                 <div id="disqus_thread"></div>
                 <script>
